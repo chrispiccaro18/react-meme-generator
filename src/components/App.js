@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import domToImage from 'dom-to-image';
+// eslint-disable-next-line
 import { saveAs } from 'file-saver';
 import { getKanyeQuote } from '../services/kanyeApi';
 import { getRandomPhoto } from '../services/loremPicsum';
@@ -11,7 +12,7 @@ export default class App extends PureComponent {
   state = {
     headerText: '',
     footerText: '',
-    photoUrl: 'https://imgflip.com/s/meme/Success-Kid.jpg'
+    photoUrl: 'https://picsum.photos/id/387/500/500'
   }
 
   submitForm = event => {
