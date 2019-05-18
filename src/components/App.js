@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import domToImage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 import { getKanyeQuote } from '../services/kanyeApi';
 import { getRandomPhoto } from '../services/loremPicsum';
 import { getRandomQuote } from '../services/quotesOnDesignApi';
@@ -14,8 +16,10 @@ export default class App extends PureComponent {
 
   submitForm = event => {
     event.preventDefault();
-    // this is where we will save to user's disk
-    console.log(this.state);
+    domToImage.toBlob(document.getElementById('meme'))
+      .then(blob => {
+        window.saveAs(blob, 'my-meme.png');
+      });
   }
 
   handleChange = ({ target }) => {
@@ -79,7 +83,7 @@ export default class App extends PureComponent {
     return (
       <>
         <MemeForm {...memeProps} />
-        <div style={divStyle}>
+        <div style={divStyle} id="meme">
           <p className="memeHeader">{headerText}</p>
           <p className="memeFooter">{footerText}</p>
         </div>

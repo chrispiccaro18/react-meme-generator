@@ -25,6 +25,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
