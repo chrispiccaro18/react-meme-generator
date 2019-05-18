@@ -4,18 +4,19 @@ import PropTypes from 'prop-types';
 export default class MemeForm extends PureComponent {
   static propTypes = {
     handleChange: PropTypes.func.isRequired,
+    handleKanyeHeader: PropTypes.func.isRequired,
     state: PropTypes.object.isRequired
   }
 
   render() {
     const { headerText, footerText, photoUrl } = this.props.state;
-    const { handleChange } = this.props;
+    const { handleChange, handleKanyeHeader } = this.props;
     return (
       <>
         <fieldset>
           <legend>Header Text</legend>
           <input onChange={handleChange} type="text" name="headerText" value={headerText}></input>
-          <button onClick={() => {console.log('kanye header');}}>Kanye</button>
+          <button onClick={handleKanyeHeader}>Kanye</button>
         </fieldset>
         <fieldset>
           <legend>Footer Text</legend>

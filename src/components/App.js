@@ -8,7 +8,7 @@ export default class App extends PureComponent {
   state = {
     headerText: '',
     footerText: '',
-    photoUrl: ''
+    photoUrl: 'https://i0.wp.com/i.imgflip.com/14icqe.jpg?w=600'
   }
 
   componentDidMount() {
@@ -23,6 +23,14 @@ export default class App extends PureComponent {
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
+  }
+
+  handleKanyeHeader = () => {
+    getKanyeQuote()
+      .then(kanyeRes => {
+        const kanyeQuote = kanyeRes.quote;
+        this.setState({ headerText: kanyeQuote });
+      });
   }
 
   fetch() {
@@ -46,7 +54,7 @@ export default class App extends PureComponent {
     const { headerText, footerText, photoUrl } = this.state;
     return (
       <>
-        <MemeForm handleChange={this.handleChange} state={this.state} />
+        <MemeForm handleChange={this.handleChange} handleKanyeHeader={this.handleKanyeHeader} state={this.state} />
         <p>{headerText}</p>
         <img src={photoUrl} alt="random image" />
         <p>{footerText}</p>
