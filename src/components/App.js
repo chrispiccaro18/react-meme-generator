@@ -8,11 +8,7 @@ export default class App extends PureComponent {
   state = {
     headerText: '',
     footerText: '',
-    photoUrl: 'https://i0.wp.com/i.imgflip.com/14icqe.jpg?w=600'
-  }
-
-  componentDidMount() {
-    // this.fetch();
+    photoUrl: 'https://imgflip.com/s/meme/Success-Kid.jpg'
   }
 
   submitForm = event => {
@@ -25,11 +21,20 @@ export default class App extends PureComponent {
     this.setState({ [target.name]: target.value });
   }
 
-  handleKanyeHeader = () => {
+  handleKanye = ({ target }) => {
+    let stateKey = null;
+    target.name.startsWith('headerText') ? stateKey = 'headerText' : stateKey = 'footerText';
     getKanyeQuote()
       .then(kanyeRes => {
         const kanyeQuote = kanyeRes.quote;
-        this.setState({ headerText: kanyeQuote });
+        this.setState({ [stateKey]: kanyeQuote });
+      });
+  }
+
+  handleRandomPhoto = () => {
+    getRandomPhoto()
+      .then(photoUrl => {
+        this.setState({ photoUrl });
       });
   }
 
@@ -51,10 +56,18 @@ export default class App extends PureComponent {
   }
 
   render() {
+    const memeProps = {
+      handleChange: this.handleChange,
+      handleKanye: this.handleKanye,
+      handleRandomPhoto: this.handleRandomPhoto,
+      state: this.state,
+    };
+
     const { headerText, footerText, photoUrl } = this.state;
+
     return (
       <>
-        <MemeForm handleChange={this.handleChange} handleKanyeHeader={this.handleKanyeHeader} state={this.state} />
+        <MemeForm {...memeProps} />
         <p>{headerText}</p>
         <img src={photoUrl} alt="random image" />
         <p>{footerText}</p>

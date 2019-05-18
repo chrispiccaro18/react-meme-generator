@@ -1,4 +1,4 @@
-const BASE_URL = 'https://picsum.photos/500/300';
+const BASE_URL = 'https://picsum.photos/500/500';
 
 export function getRandomPhoto() {
   return fetch(BASE_URL)
