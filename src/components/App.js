@@ -2,16 +2,27 @@ import React, { PureComponent } from 'react';
 import { getKanyeQuote } from '../services/kanyeApi';
 import { getRandomPhoto } from '../services/loremPicsum';
 import { getRandomQuote } from '../services/quotesOnDesignApi';
+import MemeForm from './MemeForm';
 
 export default class App extends PureComponent {
   state = {
-    kanyeQuote: '',
-    randomImage: '',
-    randomQuote: ''
+    headerText: '',
+    footerText: '',
+    photoUrl: ''
   }
 
   componentDidMount() {
-    this.fetch();
+    // this.fetch();
+  }
+
+  submitForm = event => {
+    event.preventDefault();
+    // this is where we will save to user's disk
+    console.log(this.state);
+  }
+
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
   }
 
   fetch() {
@@ -32,12 +43,14 @@ export default class App extends PureComponent {
   }
 
   render() {
-    const { kanyeQuote, randomImage, randomQuote } = this.state;
+    const { headerText, footerText, photoUrl } = this.state;
     return (
       <>
-        <p>{kanyeQuote}</p>
-        <img src={randomImage} alt="random image" />
-        <p>{randomQuote}</p>
+        <MemeForm handleChange={this.handleChange} state={this.state} />
+        <p>{headerText}</p>
+        <img src={photoUrl} alt="random image" />
+        <p>{footerText}</p>
+        <button onClick={this.submitForm}>Download Meme</button>
       </>
     );
   }
