@@ -3,6 +3,7 @@ import { getKanyeQuote } from '../services/kanyeApi';
 import { getRandomPhoto } from '../services/loremPicsum';
 import { getRandomQuote } from '../services/quotesOnDesignApi';
 import MemeForm from './MemeForm';
+import '../main.css';
 
 export default class App extends PureComponent {
   state = {
@@ -65,12 +66,23 @@ export default class App extends PureComponent {
 
     const { headerText, footerText, photoUrl } = this.state;
 
+    const divStyle = {
+      backgroundImage: `url(${photoUrl})`,
+      width: '500px',
+      height: '500px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    };
+
     return (
       <>
         <MemeForm {...memeProps} />
-        <p>{headerText}</p>
-        <img src={photoUrl} alt="random image" />
-        <p>{footerText}</p>
+        <div style={divStyle}>
+          <p className="memeHeader">{headerText}</p>
+          <p className="memeFooter">{footerText}</p>
+        </div>
         <button onClick={this.submitForm}>Download Meme</button>
       </>
     );
