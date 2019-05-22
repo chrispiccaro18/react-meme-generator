@@ -1,3 +1,11 @@
+* {
+  font-family: Hack, monospace;
+}
+
+button {
+  font-family: Monoid, 'Times New Roman', Times, serif;
+}
+
 p {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 24pt;
